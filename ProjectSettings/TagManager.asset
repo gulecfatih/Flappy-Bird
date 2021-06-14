@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - DeadArea
   layers:
   - Default
   - TransparentFX
@@ -11,7 +12,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Boru
   - 
   - 
   - 
@@ -40,4 +41,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: ArkaPlan
+    uniqueID: 3265566357
+    locked: 0
+  - name: Boru
+    uniqueID: 4159989169
+    locked: 0
+  - name: UI
+    uniqueID: 3176206125
+    locked: 0
+  - name: Bird
+    uniqueID: 977715871
+    locked: 0
+  - name: Platform
+    uniqueID: 3684833203
+    locked: 0
+  - name: BitmeUI
+    uniqueID: 3569988983
     locked: 0
