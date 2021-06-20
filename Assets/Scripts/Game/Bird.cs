@@ -11,55 +11,62 @@ public class Bird : MonoBehaviour
     Rigidbody2D myrigidbody2D;
 
     public GameManager gameManager;
-    public GameObject deadScreen;
-    public GameObject týklama;
     public Button playbutton;
     public Button stopbutton;
    
     bool deger = true;
-
+    bool stopDeger;
     void Start()
     {
+        stopbutton.gameObject.SetActive(false);
+        playbutton.gameObject.SetActive(false);
         myrigidbody2D = GetComponent<Rigidbody2D>();
         Time.timeScale = 0;
+       
     }
 
     public void Stop()
     {
         if (!isDead)
         {
-            Time.timeScale = 0;
+            Time.timeScale = 1  ;
             stopbutton.gameObject.SetActive(false);
             playbutton.gameObject.SetActive(true);
-
+            stopDeger = false ;
         }
-        
     }
     public void Play()
     {
         if (!isDead)
         {
-        Time.timeScale = 1;
-        stopbutton.gameObject.SetActive(true);
-        playbutton.gameObject.SetActive(false);
+            Time.timeScale = 0;
+            stopbutton.gameObject.SetActive(true);
+            playbutton.gameObject.SetActive(false);
+            stopDeger = true;
         }
-        
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!isDead && !stopDeger)
         {
-           
-            if (deger)
+            Debug.Log(stopDeger);
+            if (Input.GetMouseButtonDown(0))
             {
-                deger = false;
-                týklama.SetActive(false);
-                Time.timeScale = 1;
+                if (deger)
+                {
+                    stopbutton.gameObject.SetActive(false);
+                    playbutton.gameObject.SetActive(true);
+                    deger = false;
+                    FindObjectOfType<CanvasControl>().FirstScreen();
+                    Time.timeScale = 1;
+                }
+                FindObjectOfType<SesKontrol>().ZiplamaSes();
+                myrigidbody2D.velocity = Vector2.up * velocity;
+
+
             }
-            FindObjectOfType<SesKontrol>().ZiplamaSes();
-            myrigidbody2D.velocity = Vector2.up * velocity;
-        }
+         } 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -74,9 +81,8 @@ public class Bird : MonoBehaviour
     {
         if (collision.gameObject.tag == "DeadArea")
         {
-
             FindObjectOfType<SesKontrol>().OyunBittiSes();
-            deadScreen.SetActive(true);
+            FindObjectOfType<CanvasControl>().DeadScreen();
             isDead = true;
             Time.timeScale = 0;
         }
