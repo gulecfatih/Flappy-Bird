@@ -16,8 +16,6 @@ public class Spawner : MonoBehaviour
     {
         while (!birdScript.isDead)
         {
-         
-            
             Instantiate(barrier, new Vector3(3, Random.Range(-1.28f, 2.9f),0), Quaternion.identity);
             yield return new WaitForSeconds(time);
         }
